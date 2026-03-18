@@ -82,7 +82,7 @@ class Vector:
     __radd__ = __add__
 
     #
-    def __iadd_(self, other):
+    def __iadd__(self, other):
         self.x += other.x
         self.y += other.y
         return self
@@ -99,32 +99,37 @@ class Vector:
 
     #
     def __mul__(self, other):
-        assert type(other) in (int, long, float)
+        assert type(other) in (int, int, float)
         return Vector(self.x * other, self.y * other)
 
     #
     def __rmul__(self, other):
-        assert type(other) in (int, long, float)
+        assert type(other) in (int, int, float)
         return Vector(self.x * other, self.y * other)
 
     #
     def __imul__(self, other):
-        assert type(other) in (int, long, float)
+        assert type(other) in (int, int, float)
         self.x *= other
         self.y *= other
         return self
 
     #
-    def __div__(self, other):
-        assert type(other) in (int, long, float)
-        return Vector(operator.div(self.x, other),
-                      operator.div(self.y, other))
+    def __truediv__(self, other):
+        assert type(other) in (int, int, float)
+        return Vector(operator.truediv(self.x, other),
+                      operator.truediv(self.y, other))
+    
+    def __rtruediv__(self, other):
+        assert type(other) in (int, int, float)
+        return Vector(operator.truediv(self.x, other),
+                      operator.truediv(self.y, other))
 
     #
-    def __idiv__(self, other):
-        assert type(other) in (int, long, float)
-        operator.div(self.x, other)
-        operator.div(self.y, other)
+    def __itruediv__(self, other):
+        assert type(other) in (int, int, float)
+        operator.truediv(self.x, other)
+        operator.truediv(self.y, other)
         return self
 
     #
